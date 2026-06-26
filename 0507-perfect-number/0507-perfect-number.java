@@ -1,0 +1,10 @@
+class Solution {
+    public boolean checkPerfectNumber(int num) {
+        int divisorSum = 0;
+
+        for(int i = 1; i <= num/2; i++){
+            if(num % i == 0) divisorSum += i;
+        }
+        return num == divisorSum;
+    }
+}
