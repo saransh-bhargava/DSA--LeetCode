@@ -7,16 +7,18 @@ class Solution {
         Arrays.fill(result, -1);
         if (windowSize > n)
             return result;
-        for (int i = 0; i < windowSize; i++) {
-            windowSum += nums[i];
-        }
+        
         int index = k;
-        result[index++] = (int) (windowSum / windowSize);
+        
 
-        for (int i = windowSize; i < n; i++) {
+        for (int i = 0; i < n; i++) {
             windowSum += nums[i];
-            windowSum -= nums[i - windowSize];
-            result[index++] = (int) (windowSum / windowSize);
+            if(i >= windowSize){
+                windowSum -= nums[i - windowSize];
+            }
+            if(i >= windowSize - 1){
+                result[index++] = (int) (windowSum / windowSize);
+            }
         }
         return result;
     }
