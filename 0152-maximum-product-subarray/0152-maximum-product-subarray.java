@@ -7,11 +7,11 @@ class Solution {
         int totalMax = nums[0];
 
         for (int i = 1; i < n; i++) {
-            int prevMax = currMax;
+            int prevMin = currMin;
             
 
-            currMax = Math.max(nums[i], Math.max(nums[i] * prevMax , nums[i] * currMin));
-            currMin = Math.min(nums[i], Math.min(nums[i] * prevMax , nums[i] * currMin));
+            currMin = Math.min(nums[i], Math.min(nums[i] * currMax , nums[i] * prevMin));
+            currMax = Math.max(nums[i], Math.max(nums[i] * currMax , nums[i] * prevMin));
 
             totalMax = Math.max(totalMax , currMax);
             
