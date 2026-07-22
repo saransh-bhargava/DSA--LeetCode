@@ -1,27 +1,37 @@
 class Solution {
+    private static int value(char ch) {
+        switch (ch) {
+            case 'I':
+                return 1;
+            case 'V':
+                return 5;
+            case 'X':
+                return 10;
+            case 'L':
+                return 50;
+            case 'C':
+                return 100;
+            case 'D':
+                return 500;
+            case 'M':
+                return 1000;
+        }
+        return 0;
+    }
+
     public int romanToInt(String s) {
         int n = s.length();
+
         int result = 0;
-        Map<Character, Integer> map = new HashMap<>();
-        map.put('M', 1000);
-        map.put('D', 500);
-        map.put('C', 100);
-        map.put('L', 50);
-        map.put('X', 10);
-        map.put('V', 5);
-        map.put('I', 1);
-        
-        int prev = 0;
-        for (int i = n - 1; i >= 0; i--) {
-            char ch = s.charAt(i);
-                if (prev > map.get(ch)) {
-                    result -= map.get(ch);
-                    
-                } else {
-                    result += map.get(ch);
-                }
-                prev = map.get(ch);
-           
+        for (int i = 0; i < n; i++) {
+            int curr = value(s.charAt(i));
+            int next = (i + 1 < n) ? value(s.charAt(i + 1)) : 0;
+
+            if (curr < next) {
+                result -= curr;
+            } else {
+                result += curr;
+            }
         }
         return result;
     }
