@@ -25,12 +25,12 @@ public class Solution {
             fast = fast.next.next;
 
             if(slow == fast){
-                ListNode start = head;
-                while(start != slow){
+                fast = head;
+                while(fast != slow){
                     slow = slow.next;
-                    start = start.next;
+                    fast = fast.next;
                 }
-                return start;
+                return fast;
             }
         }
         return null;
