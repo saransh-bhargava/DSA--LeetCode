@@ -15,13 +15,7 @@ class Solution {
             }
         }
 
-        while(true){
-            if((set.contains(sum))){
-                sum++;
-            }else{
-                break;
-            }
-        }
+        while(set.contains(sum)) sum++;
         return sum;
     }
 }
