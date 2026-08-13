@@ -12,7 +12,7 @@ class Solution {
             }if(nums[mid] == nums[mid + 1]){
                 left = mid + 2;
             }else{
-                right = mid - 1;
+                right = mid;
             }
         }
         return nums[left];
