@@ -9,49 +9,47 @@
  * }
  */
 class Solution {
-    public ListNode findMiddle(ListNode head){
-        ListNode hare = head;
-        ListNode turtle = head;
+    public static ListNode middleNode(ListNode head){
+        ListNode slow = head;
+        ListNode fast = head;
 
-        while(hare.next != null && hare.next.next != null){
-            hare = hare.next.next;
-            turtle = turtle.next;
+        while(fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
         }
-        return turtle;
+        return slow;
     }
 
-    public ListNode reverse(ListNode head){
+    public static ListNode reverse(ListNode middle){
         ListNode prev = null;
-        ListNode curr = head;
+        ListNode curr = middle;
 
         while(curr != null){
             ListNode next = curr.next;
-
             curr.next = prev;
-
             prev = curr;
             curr = next;
         }
+       
         return prev;
     }
-
     
     public boolean isPalindrome(ListNode head) {
-        if(head == null || head.next == null){
-            return true;
-        }
+        ListNode middle = middleNode(head);
 
-        ListNode middle = findMiddle(head);
-        ListNode secondHalf = reverse(middle.next);
-        ListNode firstHalf = head;
+        ListNode ptr1 = head;
+        ListNode ptr2 = reverse(middle);
 
-        while(secondHalf != null){
-            if(secondHalf.val != firstHalf.val){
+        
+
+        while(ptr2 != null){
+            if(ptr1.val != ptr2.val){
                 return false;
             }
-            firstHalf = firstHalf.next;
-            secondHalf = secondHalf.next;
+            ptr2 = ptr2.next;
+            ptr1 = ptr1.next;
         }
+
         return true;
     }
 }
