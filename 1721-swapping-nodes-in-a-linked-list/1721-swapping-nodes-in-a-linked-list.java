@@ -1,25 +1,34 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
 class Solution {
     public ListNode swapNodes(ListNode head, int k) {
-        ListNode first = head;
-        
-        // Advance 'first' to the k-th node
-        for (int i = 1; i < k; i++) {
-            first = first.next;
+        ListNode front = head;
+
+        for(int i = 1; i < k; i++){
+            front = front.next;
         }
-        
-        // Use two pointers to locate the k-th node from the end
-        ListNode fast = first;
-        ListNode second = head;
-        while (fast.next != null) {
+
+        ListNode slow = head;
+        ListNode fast = front;
+
+        while(fast.next != null){
             fast = fast.next;
-            second = second.next;
+            slow = slow.next;
         }
-        
-        // Swap values
-        int temp = first.val;
-        first.val = second.val;
-        second.val = temp;
-        
+
+        int temp = front.val;
+        front.val = slow.val;
+        slow.val = temp;
+
         return head;
+
     }
 }
