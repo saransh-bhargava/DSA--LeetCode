@@ -2,17 +2,16 @@ class Solution {
     public boolean isValid(String s) {
         Stack<Character> stack = new Stack<>();
 
-        for(char ch : s.toCharArray()){
-            if(ch == '(' || ch == '{' || ch == '['){
-                stack.push(ch);
-            }else{
-                if(ch == ')' && !stack.isEmpty() && stack.peek() == '('){
-                    stack.pop();
-                }else if(ch == '}' && !stack.isEmpty() && stack.peek() == '{'){
-                    stack.pop();
-                }else if(ch == ']' && !stack.isEmpty() && stack.peek() == '['){
-                    stack.pop();
-                }else{
+        for (char ch : s.toCharArray()) {
+
+            if (ch == '(') {
+                stack.push(')');
+            } else if (ch == '{') {
+                stack.push('}');
+            } else if (ch == '[') {
+                stack.push(']');
+            } else {
+                if (stack.isEmpty() || stack.pop() != ch) {
                     return false;
                 }
             }
