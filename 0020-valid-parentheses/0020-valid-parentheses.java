@@ -4,14 +4,18 @@ class Solution {
 
         for (char ch : s.toCharArray()) {
 
-            if (ch == '(') {
-                stack.push(')');
-            } else if (ch == '{') {
-                stack.push('}');
-            } else if (ch == '[') {
-                stack.push(']');
+            if (ch == '(' || ch == '{' || ch == '[') {
+                stack.push(ch);
             } else {
-                if (stack.isEmpty() || stack.pop() != ch) {
+                if (stack.isEmpty()) {
+                    return false;
+                }
+
+                char top = stack.pop();
+
+                if (ch == ')' && top != '(' ||
+                        ch == '}' && top != '{' ||
+                        ch == ']' && top != '[') {
                     return false;
                 }
             }
