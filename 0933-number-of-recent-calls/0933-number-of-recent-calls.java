@@ -9,7 +9,7 @@ class RecentCounter {
     
     public int ping(int t) {
         count.add(t);
-        while(!count.isEmpty() && count.peek() < t - 3000){
+        while( count.peek() < t - 3000){
             count.poll();
         }
 
