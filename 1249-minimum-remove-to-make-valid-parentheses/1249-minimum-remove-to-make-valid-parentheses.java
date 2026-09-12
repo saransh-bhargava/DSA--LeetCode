@@ -1,10 +1,10 @@
 class Solution {
     public String minRemoveToMakeValid(String s) {
         Stack<Integer> stack = new Stack<>();
-        
-        boolean[] remove = new boolean[s.length()];
 
-        StringBuilder result = new StringBuilder();
+        int n = s.length();
+        boolean[] remove = new boolean[n];
+
         int index = 0;
         for(char ch : s.toCharArray()){
             if(ch == '('){
@@ -12,25 +12,24 @@ class Solution {
             }else if(ch == ')'){
                 if(!stack.isEmpty()){
                     stack.pop();
-                }else{
-                    remove[index] = true;
-                }
+               }else{
+                remove[index] = true;
+               }
             }
             index++;
         }
 
-        while(!stack.isEmpty()){
+        while(!stack.isEmpty()) {
             remove[stack.pop()] = true;
         }
 
-        index = 0;
-        for(char ch : s.toCharArray()){
-            if(remove[index] == false){
-                result.append(ch);
-            }
-            index++;
-        }
+        StringBuilder sb = new StringBuilder();
 
-        return result.toString();
+        for(int i = 0; i < n; i++){
+            if(remove[i] == false){
+                sb.append(s.charAt(i));
+            }
+        }
+        return sb.toString();
     }
 }
