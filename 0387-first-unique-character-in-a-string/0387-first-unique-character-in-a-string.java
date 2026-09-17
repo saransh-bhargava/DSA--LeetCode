@@ -4,24 +4,23 @@ import java.util.Map;
 class Solution {
     public int firstUniqChar(String s) {
         int n = s.length();
-        if (n == 1) {
-            return 0;
+
+        Queue<Integer> queue = new LinkedList<>();
+        int[] freqArray = new int[26];
+
+        for (int i = 0; i < n; i++) {
+            queue.offer(i);
+            freqArray[s.charAt(i) - 'a']++;
         }
 
-        if (!s.substring(1).contains(s.substring(0, 1))) {
-
-            return 0;
-        }
-        for (int i = 1; i < n - 1; i++) {
-            if (!s.substring(0, i).contains(s.substring(i, i + 1))
-                    && !s.substring(i + 1).contains(s.substring(i, i + 1))) {
-
-                return i;
+        while (queue.size() != 0) {
+            if (freqArray[s.charAt(queue.peek())- 'a'] > 1) {
+                queue.poll();
+            } else {
+                break;
             }
         }
-        if (!s.substring(0, n - 1).contains(s.substring(n - 1)))
-            return n - 1;
-        
-        return -1;
+        if(queue.isEmpty()) return -1;
+        return queue.peek();
     }
 }
