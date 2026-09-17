@@ -20,7 +20,7 @@ class Solution {
                 break;
             }
         }
-        if(queue.isEmpty()) return -1;
-        return queue.peek();
+        
+        return queue.isEmpty() ? -1 : queue.peek();
     }
 }
