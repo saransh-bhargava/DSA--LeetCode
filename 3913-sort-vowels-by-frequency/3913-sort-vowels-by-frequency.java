@@ -1,6 +1,6 @@
 class Solution {
     public String sortVowels(String s) {
-        HashMap<Character, Integer> map = new HashMap<>();
+        HashMap<Character, Integer> map = new LinkedHashMap<>();
 
         for (char ch : s.toCharArray()) {
             if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u') {
@@ -8,27 +8,14 @@ class Solution {
             }
         }
 
-        PriorityQueue<Map.Entry<Character, Integer>> heap = new PriorityQueue<>((a, b) -> {
-            int fa = a.getValue();
-            int fb = b.getValue();
-
-            if (fa == fb) {
-                return Integer.compare(s.indexOf(a.getKey()), s.indexOf(b.getKey()));
-            }
-            return Integer.compare(fb, fa); // higher frequency first
-        });
-
-        heap.addAll(map.entrySet());
+        List<Map.Entry<Character,Integer>> list = new ArrayList<>(map.entrySet());
+        list.sort((a,b) -> Integer.compare(b.getValue(), a.getValue()));
+        
 
         StringBuilder sb = new StringBuilder();
-
-        while (!heap.isEmpty()) {
-            Map.Entry<Character, Integer> temp = heap.poll();
-            char key = temp.getKey();
-            int value = temp.getValue();
-
-            for (int i = 0; i < value; i++) {
-                sb.append(String.valueOf(key));
+        for(Map.Entry<Character,Integer> entry : list){
+            for(int i = 0; i < entry.getValue(); i++){
+                sb.append(String.valueOf(entry.getKey()));
             }
         }
 
