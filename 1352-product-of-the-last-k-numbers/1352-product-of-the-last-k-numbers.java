@@ -1,19 +1,29 @@
 class ProductOfNumbers {
     ArrayList<Integer> list;
+    int size;
+
     public ProductOfNumbers() {
         this.list = new ArrayList<>();
+        list.add(1);
+        this.size = 0;
     }
-    
+
     public void add(int num) {
-        list.add(num);
-    }
-    
-    public int getProduct(int k) {
-        int product = 1;
-        for(int i = list.size() - 1; i >= list.size() - k; i--){
-            product *= list.get(i);
+        if (num == 0) {
+            list = new ArrayList<>();
+            list.add(1);
+            size = 0;
+        } else {
+            list.add(list.get(size) * num);
+            size++;
         }
-        return product;
+        
+    }
+
+    public int getProduct(int k) {
+        if (k > size)
+            return 0;
+        return list.get(size) / list.get(size - k);
     }
 }
 
